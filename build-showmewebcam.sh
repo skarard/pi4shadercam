@@ -29,7 +29,7 @@ CONFIG_="BR2" KCONFIG_CONFIG="configs/${BOARDNAME}_defconfig" "$BUILDROOT_DIR/su
 sed "1i ### DO NOT EDIT, this file was automatically generated\n" -i "configs/${BOARDNAME}_defconfig"
 
 # Duplicate pi0 linux config for pi0w
-if [ ${BOARDNAME} == "raspberrypi0w" ]; then
+if [ $BOARDNAME = "raspberrypi0w" ]; then
   cp "board/linux-raspberrypi0.config" "board/linux-${BOARDNAME}.config"
 fi
 
