@@ -25,7 +25,7 @@ jobs:
 
     strategy:
       matrix:
-        raspberry: ['raspberrypi0', 'raspberrypi0w']
+        raspberry: ['raspberrypi0', 'raspberrypi0w', 'raspberrypi4']
 
     steps:
       - name: Checkout Code
@@ -53,12 +53,12 @@ jobs:
           # https://github.com/actions/cache/issues/2#issuecomment-673493515
           key: ${{ matrix.raspberry }}-${{ env.BUILDROOT_DIR }}-${{ env.BUILDROOT_VERSION }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Download Buildroot
-        if: steps.restore-cache.outputs.cache-hit != 'true'
-        run: |
-          wget -qc https://buildroot.org/downloads/buildroot-${{ env.BUILDROOT_VERSION }}.tar.gz
-          tar -zxf buildroot-${{ env.BUILDROOT_VERSION }}.tar.gz
-          mv buildroot-${{ env.BUILDROOT_VERSION }} ${{ env.BUILDROOT_DIR }}
+      # - name: Download Buildroot
+      #   if: steps.restore-cache.outputs.cache-hit != 'true'
+      #   run: |
+      #     wget -qc https://buildroot.org/downloads/buildroot-${{ env.BUILDROOT_VERSION }}.tar.gz
+      #     tar -zxf buildroot-${{ env.BUILDROOT_VERSION }}.tar.gz
+      #     mv buildroot-${{ env.BUILDROOT_VERSION }} ${{ env.BUILDROOT_DIR }}
 
       - name: Build Image
         run: |
