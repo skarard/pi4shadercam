@@ -30,7 +30,7 @@ sed "1i ### DO NOT EDIT, this file was automatically generated\n" -i "configs/${
 
 # Duplicate pi0 linux config for pi0w
 if [ ${BOARDNAME} == "raspberrypi0w" ]; then
-  cp  "board/linux-raspberrypi0.config" "board/linux-${BOARDNAME}.config"
+  cp "board/linux-raspberrypi0.config" "board/linux-${BOARDNAME}.config"
 fi
 
 # Merge kernel configurations
