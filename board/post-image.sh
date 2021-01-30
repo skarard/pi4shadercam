@@ -66,9 +66,9 @@ __EOF__
 		fi
 
 		# Inform the kernel about the filesystem and ro state
-		if ! grep -qE 'rootfstype=squashfs ro' "${BINARIES_DIR}/rpi-firmware/cmdline.txt"; then
-			sed '/^root=/ s/$/ rootfstype=squashfs ro/' -i "${BINARIES_DIR}/rpi-firmware/cmdline.txt"
-		fi
+		# if ! grep -qE 'rootfstype=squashfs ro' "${BINARIES_DIR}/rpi-firmware/cmdline.txt"; then
+		# 	sed '/^root=/ s/$/ rootfstype=squashfs ro/' -i "${BINARIES_DIR}/rpi-firmware/cmdline.txt"
+		# fi
 
 		if ! grep -qE 'modules-load=dwc2,libcomposite' "${BINARIES_DIR}/rpi-firmware/cmdline.txt"; then
 			sed '/^root=/ s/$/ modules-load=dwc2,libcomposite/' -i "${BINARIES_DIR}/rpi-firmware/cmdline.txt"
