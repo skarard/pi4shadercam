@@ -3,7 +3,7 @@
 # Eventually we want to disable the serial interface by default
 # As it can be used as a persistence exploitation vector
 CONFIGURE_USB_SERIAL=false
-CONFIGURE_USB_WEBCAM=true
+CONFIGURE_USB_WEBCAM=false
 
 # Now apply settings from the boot config
 if [ -f "/boot/enable-serial-debug" ] ; then
@@ -86,14 +86,27 @@ config_usb_webcam () {
 }
 
 # Check if camera is installed correctly
-if [ ! -e /dev/video0 ] ; then
-  echo "I did not detect a camera connected to the Pi. Please check your hardware."
-  CONFIGURE_USB_WEBCAM=false
+if [ -e /dev/video0 ] ; then
+  CONFIGURE_USB_WEBCAM=true
+else
+  COUNT=0
+  while [ $COUNT -lt 3 ] ; do
+      if [ -e /dev/video0 ] ; then
+        CONFIGURE_USB_WEBCAM=true
+        echo "Camera detected after $COUNT seconds."
+        break
+      fi
+      sleep 1
+      let COUNT++
+  done
 fi
 
 if [ "$CONFIGURE_USB_WEBCAM" = true ] ; then
   echo "Configuring USB gadget webcam interface"
   config_usb_webcam
+else
+  echo "No camera detected after 3 seconds. Enabled serial for debugging."
+  CONFIGURE_USB_SERIAL=true
 fi
 
 if [ "$CONFIGURE_USB_SERIAL" = true ] ; then
