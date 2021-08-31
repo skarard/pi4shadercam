@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-PIWEBCAM_VERSION = 28605a4f79fe6bb9de9a3e2babfa0ce22c668e5f
-PIWEBCAM_SITE = git://github.com/peterbay/uvc-gadget.git
+PIWEBCAM_VERSION = f82087001fa476728aec8a1e70bcc6e90e4f4fce
+PIWEBCAM_SITE = git://github.com/skarard/uvc-gadget.git
 PIWEBCAM_LICENSE = GPL-2.0+
 PIWEBCAM_LICENSE_FILES = LICENSE
 PIWEBCAM_DEST_DIR = /opt/uvc-webcam
@@ -19,9 +19,12 @@ endef
 define PIWEBCAM_INSTALL_TARGET_CMDS
 	mkdir -p $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
 	$(INSTALL) -D -m 0755 $(@D)/uvc-gadget $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
-	$(INSTALL) -D -m 0755 $(PIWEBCAM_PKGDIR)/gadget-check.sh $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
-	$(INSTALL) -D -m 0755 $(PIWEBCAM_PKGDIR)/gadget-cleanup.sh $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
-	$(INSTALL) -D -m 0755 $(PIWEBCAM_PKGDIR)/multi-gadget.sh $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
+	$(INSTALL) -D -m 0755 $(@D)/gadget-check.sh $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
+	$(INSTALL) -D -m 0755 $(@D)/gadget-cleanup.sh $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
+	$(INSTALL) -D -m 0755 $(@D)/gadget-run.sh $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
+	$(INSTALL) -D -m 0755 $(PIWEBCAM_PKGDIR)/conf-pi4shadercam-uncompressed $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
+	$(INSTALL) -D -m 0755 $(PIWEBCAM_PKGDIR)/remove-barrel-distortion.frag $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
+	$(INSTALL) -D -m 0755 $(PIWEBCAM_PKGDIR)/pi4shadercam.sh $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
 	$(INSTALL) -D -m 0755 $(PIWEBCAM_PKGDIR)/start-webcam.sh $(TARGET_DIR)$(PIWEBCAM_DEST_DIR)
 endef
 

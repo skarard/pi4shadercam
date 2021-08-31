@@ -4,7 +4,8 @@ After=systemd-udev-settle.service
 
 [Service]
 Type=oneshot
-ExecStart=/opt/uvc-webcam/multi-gadget.sh
+Environment=CONFIGFS_PATH=/sys/kernel/config
+ExecStart=/opt/uvc-webcam/gadget-run.sh /opt/uvc-webcam/conf-pi4shadercam-uncompressed init
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=usb-gadget-config

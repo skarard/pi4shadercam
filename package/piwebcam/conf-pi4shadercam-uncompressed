@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export FPS=30
+export STDIN_WIDTH=640
+export STDIN_HEIGHT=360
+STDIN_STREAM="YUYV"
+
+INIT_UVC=true
+INIT_SERIAL=true
+
+UVC_FORMATS=(
+    "uncompressed:u:${FPS}:${STDIN_WIDTH}:${STDIN_HEIGHT}"
+)
